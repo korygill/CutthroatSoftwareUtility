@@ -1,0 +1,37 @@
+TOPIC
+    Cutthroat Software Utilities
+
+SHORT DESCRIPTION
+    Cutthroat Software Utilities are helpful PowerShell functions and scripts for keeping your computer
+    backed up, showing diagnostic information, and more.
+
+LONG DESCRIPTION
+    n/a
+
+EXAMPLES
+    Create scheduled tasks to backup files daily, and the system weekly.
+    Here are some pointers to get you started...
+    
+    Get-ScheduledTask -TaskName "kg*" | % {$_.TaskName;$_.Description;$_.Actions;}
+
+    KG-Daily Drive Robo Sync
+    Backs up all data drives by Robocopying data to secondary drives.
+    Arguments        : -NonInteractive -Command "& {$log = 'c:\Logs\BackupAllDrives.log.txt'; ipmo CutthroatSoftwareUtility | Out-File -File $log; Start-BackupAllDrives | Out-File -File $log -Append}"
+    Execute          : powershell
+
+    KG-System-Backup
+    Runs a system backup via wbadmin.exe
+    Arguments        : -NonInteractive -Command "& {$log = 'c:\Logs\BackupSystem.log.txt'; ipmo CutthroatSoftwareUtility | Out-File -File $log; Start-BackupSystem | Out-File -File $log -Append}"
+    Execute          : powershell
+
+KEYWORDS
+    Cutthroat Software
+    Utilities
+    Backup
+    Mail
+
+SEE ALSO
+    Get-Choice
+    Start-BackupAllDrives
+    Start-BackupSystem
+    Send-EMail
