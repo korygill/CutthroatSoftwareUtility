@@ -37,8 +37,6 @@
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LICENSE.md" />
-    <Compile Include="README.md" />
     <Compile Include="src\Backup-System.psm1" />
     <Compile Include="src\CutthroatSoftwareUtility.psd1" />
     <Compile Include="src\CutthroatSoftwareUtility.psm1" />
