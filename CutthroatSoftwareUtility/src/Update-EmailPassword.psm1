@@ -13,3 +13,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 #>
+
+function Update-EmailPassword
+{
+    $in = Get-Credential -UserName $global:UserConfig.Email.UserName -Message "Enter your email address and password.`nIf you use two-factor authentication, use an app password."
+
+    if ($in -ne $null)
+    {
+        $global:UserConfig.Email.Password = $in.Password
+
+        Update-UserConfigFile
+    }
+}
+
+Export-ModuleMember -Function Update-EmailPassword
