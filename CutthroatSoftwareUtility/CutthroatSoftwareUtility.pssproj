@@ -45,6 +45,8 @@
     <Compile Include="src\Send-EMail.psm1" />
     <Compile Include="src\Backup-Drive.psm1" />
     <Compile Include="src\Set-Constants.ps1" />
+    <Compile Include="src\Update-EmailPassword.psm1" />
+    <Compile Include="src\Update-UserConfigFIle.psm1" />
     <Compile Include="tools\deploy.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

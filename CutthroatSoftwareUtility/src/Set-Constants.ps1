@@ -1,5 +1,5 @@
 <#
-Copyright 2015 Cutthroat Software
+Copyright 2016 Cutthroat Software
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -74,6 +74,12 @@ function Create-UserConfig ([string]$userConfigFile)
     $email.UseSSL = !$in
 
     $in = Get-Credential -Message "Enter your email address and password.`nIf you use two-factor authentication, use an app password."
+
+    if ($in -eq $null)
+    {
+        throw "Unsupported operation. Try again."
+    }
+
     $email.UserName = $in.UserName
     $email.Password = $in.Password | ConvertFrom-SecureString
 
@@ -110,7 +116,6 @@ function Create-UserConfig ([string]$userConfigFile)
 
     return $uc
 }
-
 
 function global:MaybeOutputExceptionAndThrow([string]$exception)
 {
@@ -162,10 +167,9 @@ try {
     # make password a secure string
     $global:UserConfig.Email.Password = ($global:UserConfig.Email.Password | ConvertTo-SecureString)
 
-    # display our config
-    Write-Output "$global:CSU version $($csuVersion), configuration version $($global:ConfigurationVersion)"
-    Write-Output "User Config File: $userConfigFile"
-    $global:UserConfig | fl | Write-Output
+    Import-Module (Join-Path $scriptPath Update-UserConfigFIle.psm1) -Verbose -Force
+
+    Show-UserConfigFile
 
     # if script not same as data file, bail out
     if ($global:UserConfig.Version -ne $global:ConfigurationVersion)
